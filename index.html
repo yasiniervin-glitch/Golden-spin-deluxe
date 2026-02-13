@@ -2,184 +2,53 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Golden Spin Deluxe PRO</title>
+<title>Golden Spin Arcade</title>
 
 <style>
 body{
     margin:0;
-    background:radial-gradient(circle,#111,#000);
-    font-family:Arial, sans-serif;
-    text-align:center;
+    background:black;
     color:white;
+    font-family:Arial;
+    text-align:center;
 }
 
 h1{
     color:gold;
-    margin-top:20px;
-    text-shadow:0 0 10px gold;
+    margin-top:30px;
 }
 
-#balance, #jackpot{
-    margin:5px;
-    font-size:18px;
+.menu{
+    margin-top:50px;
 }
 
-.slot-container{
-    display:flex;
-    justify-content:center;
-    margin:30px 0;
-}
-
-.slot{
-    font-size:60px;
-    margin:0 15px;
-    background:#111;
-    padding:20px;
-    border-radius:15px;
-    box-shadow:0 0 15px gold;
-}
-
-button{
+a{
+    display:block;
+    margin:15px auto;
+    padding:15px;
+    width:70%;
+    max-width:300px;
     background:gold;
-    border:none;
-    padding:10px 20px;
-    margin:5px;
-    font-size:16px;
-    border-radius:8px;
-    cursor:pointer;
-}
-
-button:hover{
-    background:#ffd700;
-}
-
-#message{
-    margin-top:15px;
-    font-size:20px;
-    min-height:30px;
-}
-
-#leaderboard{
-    margin-top:20px;
-    font-size:14px;
-}
-
-@media(max-width:600px){
-    .slot{font-size:45px; margin:0 5px;}
+    color:black;
+    text-decoration:none;
+    font-weight:bold;
+    border-radius:10px;
 }
 </style>
 </head>
 
 <body>
 
-<h1>🎰 Golden Spin Deluxe PRO 🎰</h1>
+<h1>🎮 Golden Spin Arcade 🎮</h1>
 
-<div id="balance"></div>
-<div id="jackpot"></div>
-
-<div class="slot-container">
-<div class="slot" id="slot1">❓</div>
-<div class="slot" id="slot2">❓</div>
-<div class="slot" id="slot3">❓</div>
+<div class="menu">
+    <a href="slot.html">🎰 Slot Game</a>
+    <a href="coin.html">🪙 Coin Flip</a>
+    <a href="dice.html">🎲 Dice Game</a>
+    <a href="arcade.html">🕹 Arcade Game</a>
 </div>
 
-<div>
-<button onclick="setBet(10)">Bet 10</button>
-<button onclick="setBet(25)">Bet 25</button>
-<button onclick="setBet(50)">Bet 50</button>
-</div>
-
-<button onclick="spin()">SPIN</button>
-
-<div id="message"></div>
-
-<div id="leaderboard">
-<h3>🏆 Top Wins</h3>
-<ol id="scores"></ol>
-</div>
-
-<audio id="spinSound" src="https://assets.mixkit.co/active_storage/sfx/2003/2003-preview.mp3"></audio>
-<audio id="winSound" src="https://assets.mixkit.co/active_storage/sfx/1994/1994-preview.mp3"></audio>
-
-<script>
-let symbols=["🍒","🍋","🔔","💎","⭐","7️⃣"];
-let balance=localStorage.getItem("balance") ? parseInt(localStorage.getItem("balance")) : 200;
-let jackpot=localStorage.getItem("jackpot") ? parseInt(localStorage.getItem("jackpot")) : 500;
-let bet=10;
-let leaderboard=localStorage.getItem("leaderboard") ? JSON.parse(localStorage.getItem("leaderboard")) : [];
-
-updateUI();
-
-function setBet(amount){
-    bet=amount;
-    document.getElementById("message").innerHTML="Bet set to "+bet;
-}
-
-function spin(){
-
-    if(balance<bet){
-        document.getElementById("message").innerHTML="❌ Not enough balance!";
-        return;
-    }
-
-    balance-=bet;
-    jackpot+=Math.floor(bet/2);
-
-    document.getElementById("spinSound").play();
-
-    let s1=randomSymbol();
-    let s2=randomSymbol();
-    let s3=randomSymbol();
-
-    document.getElementById("slot1").innerHTML=s1;
-    document.getElementById("slot2").innerHTML=s2;
-    document.getElementById("slot3").innerHTML=s3;
-
-    if(s1===s2 && s2===s3){
-        let winAmount=bet*5;
-
-        if(s1==="7️⃣"){
-            winAmount=jackpot;
-            jackpot=500;
-            document.getElementById("message").innerHTML="💰 MEGA JACKPOT!";
-        } else {
-            document.getElementById("message").innerHTML="🎉 You win "+winAmount;
-        }
-
-        balance+=winAmount;
-        leaderboard.push(winAmount);
-        leaderboard.sort((a,b)=>b-a);
-        leaderboard=leaderboard.slice(0,5);
-
-        document.getElementById("winSound").play();
-    } else {
-        document.getElementById("message").innerHTML="Try again!";
-    }
-
-    saveData();
-    updateUI();
-}
-
-function randomSymbol(){
-    return symbols[Math.floor(Math.random()*symbols.length)];
-}
-
-function updateUI(){
-    document.getElementById("balance").innerHTML="Balance: "+balance+" 💰";
-    document.getElementById("jackpot").innerHTML="Jackpot: "+jackpot+" 💎";
-    let list="";
-    leaderboard.forEach(score=>{
-        list+="<li>"+score+"</li>";
-    });
-    document.getElementById("scores").innerHTML=list;
-}
-
-function saveData(){
-    localStorage.setItem("balance",balance);
-    localStorage.setItem("jackpot",jackpot);
-    localStorage.setItem("leaderboard",JSON.stringify(leaderboard));
-}
-</script>
+<p>Free to Play - No Real Money Gambling</p>
 
 </body>
 </html>
