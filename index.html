@@ -7,19 +7,25 @@
 <style>
 body{
     margin:0;
-    background:black;
-    color:white;
+    background:radial-gradient(circle,#111,#000);
     font-family:Arial;
+    color:white;
     text-align:center;
 }
 
 h1{
     color:gold;
-    margin-top:30px;
+    margin-top:20px;
+    text-shadow:0 0 10px gold;
+}
+
+#balance{
+    font-size:18px;
+    margin:10px;
 }
 
 .menu{
-    margin-top:50px;
+    margin-top:40px;
 }
 
 a{
@@ -39,7 +45,9 @@ a{
 
 <body>
 
-<h1>🎮 Golden Spin Arcade 🎮</h1>
+<h1>🎰 Golden Spin Arcade 🎰</h1>
+
+<div id="balance"></div>
 
 <div class="menu">
     <a href="slot.html">🎰 Slot Game</a>
@@ -49,6 +57,19 @@ a{
 </div>
 
 <p>Free to Play - No Real Money Gambling</p>
+
+<script>
+if(!localStorage.getItem("balance")){
+    localStorage.setItem("balance", 500);
+}
+
+function updateBalance(){
+    let balance = localStorage.getItem("balance");
+    document.getElementById("balance").innerHTML = "Balance: " + balance + " 💰";
+}
+
+updateBalance();
+</script>
 
 </body>
 </html>
