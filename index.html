@@ -3,72 +3,34 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Golden Spin Arcade</title>
-
-<style>
-body{
-    margin:0;
-    background:radial-gradient(circle,#111,#000);
-    font-family:Arial;
-    color:white;
-    text-align:center;
-}
-
-h1{
-    color:gold;
-    margin-top:20px;
-    text-shadow:0 0 10px gold;
-}
-
-#balance{
-    font-size:18px;
-    margin:10px;
-}
-
-.menu{
-    margin-top:40px;
-}
-
-a{
-    display:block;
-    margin:15px auto;
-    padding:15px;
-    width:70%;
-    max-width:300px;
-    background:gold;
-    color:black;
-    text-decoration:none;
-    font-weight:bold;
-    border-radius:10px;
-}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<h1>🎰 Golden Spin Arcade 🎰</h1>
+<header>
+    <h1>🎰 Golden Spin Arcade 🎰</h1>
+    <div class="balance-bar" id="balance"></div>
+</header>
 
-<div id="balance"></div>
-
-<div class="menu">
-    <a href="slot.html">🎰 Slot Game</a>
-    <a href="coin.html">🪙 Coin Flip</a>
-    <a href="dice.html">🎲 Dice Game</a>
-    <a href="arcade.html">🕹 Arcade Game</a>
+<div class="casino-box">
+    <a class="menu-btn" href="slot.html">🎰 Slot Game</a>
+    <a class="menu-btn" href="coin.html">🪙 Coin Flip</a>
+    <a class="menu-btn" href="dice.html">🎲 Dice Game</a>
+    <a class="menu-btn" href="arcade.html">🕹 Arcade Game</a>
 </div>
 
-<p>Free to Play - No Real Money Gambling</p>
+<footer>
+Free to Play - No Real Money Gambling
+</footer>
 
 <script>
 if(!localStorage.getItem("balance")){
-    localStorage.setItem("balance", 500);
+    localStorage.setItem("balance",500);
 }
 
-function updateBalance(){
-    let balance = localStorage.getItem("balance");
-    document.getElementById("balance").innerHTML = "Balance: " + balance + " 💰";
-}
-
-updateBalance();
+document.getElementById("balance").innerHTML=
+"Balance: "+localStorage.getItem("balance")+" 💰";
 </script>
 
 </body>
