@@ -1,100 +1,5 @@
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Golden Spin Deluxe PRO</title>
-
-<style>
-body{
-    margin:0;
-    background:radial-gradient(circle,#111,#000);
-    font-family:Arial, sans-serif;
-    text-align:center;
-    color:white;
-}
-
-h1{
-    color:gold;
-    margin-top:20px;
-    text-shadow:0 0 10px gold;
-}
-
-#balance, #jackpot{
-    margin:5px;
-    font-size:18px;
-}
-
-.slot-container{
-    display:flex;
-    justify-content:center;
-    margin:30px 0;
-}
-
-.slot{
-    font-size:60px;
-    margin:0 15px;
-    background:#111;
-    padding:20px;
-    border-radius:15px;
-    box-shadow:0 0 15px gold;
-}
-
-button{
-    background:gold;
-    border:none;
-    padding:10px 20px;
-    margin:5px;
-    font-size:16px;
-    border-radius:8px;
-    cursor:pointer;
-}
-
-button:hover{
-    background:#ffd700;
-}
-
-#message{
-    margin-top:15px;
-    font-size:20px;
-    min-height:30px;
-}
-
-@media(max-width:600px){
-    .slot{font-size:45px; margin:0 5px;}
-}
-</style>
-</head>
-
-<body>
-
-<h1>🎰 Golden Spin Deluxe PRO 🎰</h1>
-
-<div id="balance"></div>
-<div id="jackpot"></div>
-
-<div class="slot-container">
-<div class="slot" id="slot1">❓</div>
-<div class="slot" id="slot2">❓</div>
-<div class="slot" id="slot3">❓</div>
-</div>
-
-<div>
-<button onclick="setBet(10)">Bet 10</button>
-<button onclick="setBet(25)">Bet 25</button>
-<button onclick="setBet(50)">Bet 50</button>
-</div>
-
-<button onclick="spin()">SPIN</button>
-
-<div id="message"></div>
-
-<audio id="spinSound" src="https://assets.mixkit.co/active_storage/sfx/2003/2003-preview.mp3"></audio>
-<audio id="winSound" src="https://assets.mixkit.co/active_storage/sfx/1994/1994-preview.mp3"></audio>
-
 <script>
 let symbols=["🍒","🍋","🔔","💎","⭐","7️⃣"];
-let balance=localStorage.getItem("balance") ? parseInt(localStorage.getItem("balance")) : 200;
 let jackpot=localStorage.getItem("jackpot") ? parseInt(localStorage.getItem("jackpot")) : 500;
 let bet=10;
 
@@ -106,6 +11,8 @@ function setBet(amount){
 }
 
 function spin(){
+
+    let balance=parseInt(localStorage.getItem("balance"));
 
     if(balance<bet){
         document.getElementById("message").innerHTML="❌ Not enough balance!";
@@ -142,7 +49,9 @@ function spin(){
         document.getElementById("message").innerHTML="Try again!";
     }
 
-    saveData();
+    localStorage.setItem("balance", balance);
+    localStorage.setItem("jackpot", jackpot);
+
     updateUI();
 }
 
@@ -151,17 +60,8 @@ function randomSymbol(){
 }
 
 function updateUI(){
+    let balance=localStorage.getItem("balance");
     document.getElementById("balance").innerHTML="Balance: "+balance+" 💰";
     document.getElementById("jackpot").innerHTML="Jackpot: "+jackpot+" 💎";
 }
-
-function saveData(){
-    localStorage.setItem("balance",balance);
-    localStorage.setItem("jackpot",jackpot);
-}
 </script>
-
-<a href="index.html" style="color:gold;display:block;margin-top:20px;">⬅ Back to Menu</a>
-
-</body>
-</html>
