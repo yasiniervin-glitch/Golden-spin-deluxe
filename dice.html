@@ -1,1 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dice Game</title>
+<style>
+body{background:black;color:white;text-align:center;font-family:Arial;}
+button{padding:15px;font-size:18px;background:gold;border:none;border-radius:8px;}
+</style>
+</head>
+<body>
 
+<h1>🎲 Dice Game</h1>
+<h2 id="dice">Roll the Dice</h2>
+
+<button onclick="roll()">ROLL</button>
+
+<script>
+function roll(){
+    let number=Math.floor(Math.random()*6)+1;
+    document.getElementById("dice").innerHTML="You rolled: "+number;
+}
+</script>
+
+<a href="index.html">⬅ Back</a>
+
+</body>
+</html>
