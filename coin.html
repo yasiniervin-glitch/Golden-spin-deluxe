@@ -1,1 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coin Flip</title>
+<style>
+body{background:black;color:white;text-align:center;font-family:Arial;}
+button{padding:15px;font-size:18px;background:gold;border:none;border-radius:8px;}
+</style>
+</head>
+<body>
 
+<h1>🪙 Coin Flip</h1>
+<h2 id="result">Press Flip</h2>
+
+<button onclick="flip()">FLIP</button>
+
+<script>
+function flip(){
+    let result=Math.random()<0.5?"Heads":"Tails";
+    document.getElementById("result").innerHTML=result;
+}
+</script>
+
+<a href="index.html">⬅ Back</a>
+
+</body>
+</html>
