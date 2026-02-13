@@ -1,1 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Click Game</title>
+<style>
+body{background:black;color:white;text-align:center;font-family:Arial;}
+button{padding:15px;font-size:18px;background:gold;border:none;border-radius:8px;}
+</style>
+</head>
+<body>
 
+<h1>🕹 Click Challenge</h1>
+<p>Click as many times as you can!</p>
+
+<h2 id="score">0</h2>
+
+<button onclick="add()">CLICK!</button>
+
+<script>
+let score=0;
+function add(){
+    score++;
+    document.getElementById("score").innerHTML=score;
+}
+</script>
+
+<a href="index.html">⬅ Back</a>
+
+</body>
+</html>
