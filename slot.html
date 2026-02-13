@@ -1,52 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Slot Machine</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <h1>🎰 Slot Machine 🎰</h1>
+    <div class="balance-bar" id="balance"></div>
+    <div class="balance-bar" id="jackpot"></div>
+</header>
+
+<div class="casino-box">
+
+    <div>
+        <span class="slot" id="slot1">❓</span>
+        <span class="slot" id="slot2">❓</span>
+        <span class="slot" id="slot3">❓</span>
+    </div>
+
+    <div>
+        <button onclick="setBet(10)">Bet 10</button>
+        <button onclick="setBet(25)">Bet 25</button>
+        <button onclick="setBet(50)">Bet 50</button>
+    </div>
+
+    <button onclick="spin()">SPIN</button>
+
+    <p id="message"></p>
+
+</div>
+
+<a href="index.html" class="menu-btn">⬅ Back to Menu</a>
+
+<audio id="spinSound" src="https://assets.mixkit.co/active_storage/sfx/2003/2003-preview.mp3"></audio>
+<audio id="winSound" src="https://assets.mixkit.co/active_storage/sfx/1994/1994-preview.mp3"></audio>
+
 <script>
-let symbols=["🍒","🍋","🔔","💎","⭐","7️⃣"];
-let jackpot=localStorage.getItem("jackpot") ? parseInt(localStorage.getItem("jackpot")) : 500;
-let bet=10;
+
+let symbols = ["🍒","🍋","🔔","💎","⭐","7️⃣"];
+let bet = 10;
+
+if(!localStorage.getItem("balance")){
+    localStorage.setItem("balance",500);
+}
+
+if(!localStorage.getItem("jackpot")){
+    localStorage.setItem("jackpot",1000);
+}
 
 updateUI();
 
 function setBet(amount){
-    bet=amount;
-    document.getElementById("message").innerHTML="Bet set to "+bet;
+    bet = amount;
+    document.getElementById("message").innerHTML = "Bet set to " + bet;
 }
 
 function spin(){
 
-    let balance=parseInt(localStorage.getItem("balance"));
+    let balance = parseInt(localStorage.getItem("balance"));
+    let jackpot = parseInt(localStorage.getItem("jackpot"));
 
-    if(balance<bet){
-        document.getElementById("message").innerHTML="❌ Not enough balance!";
+    if(balance < bet){
+        document.getElementById("message").innerHTML = "❌ Not enough balance!";
         return;
     }
 
-    balance-=bet;
-    jackpot+=Math.floor(bet/2);
+    balance -= bet;
+    jackpot += Math.floor(bet/2);
 
     document.getElementById("spinSound").play();
 
-    let s1=randomSymbol();
-    let s2=randomSymbol();
-    let s3=randomSymbol();
+    let s1 = randomSymbol();
+    let s2 = randomSymbol();
+    let s3 = randomSymbol();
 
-    document.getElementById("slot1").innerHTML=s1;
-    document.getElementById("slot2").innerHTML=s2;
-    document.getElementById("slot3").innerHTML=s3;
+    document.getElementById("slot1").innerHTML = s1;
+    document.getElementById("slot2").innerHTML = s2;
+    document.getElementById("slot3").innerHTML = s3;
 
-    if(s1===s2 && s2===s3){
-        let winAmount=bet*5;
+    if(s1 === s2 && s2 === s3){
 
-        if(s1==="7️⃣"){
-            winAmount=jackpot;
-            jackpot=500;
-            document.getElementById("message").innerHTML="💰 MEGA JACKPOT!";
+        let winAmount = bet * 5;
+
+        if(s1 === "7️⃣"){
+            winAmount = jackpot;
+            jackpot = 1000;
+            document.getElementById("message").innerHTML = "💰 MEGA JACKPOT!";
         } else {
-            document.getElementById("message").innerHTML="🎉 You win "+winAmount;
+            document.getElementById("message").innerHTML = "🎉 You win " + winAmount;
         }
 
-        balance+=winAmount;
+        balance += winAmount;
         document.getElementById("winSound").play();
+
     } else {
-        document.getElementById("message").innerHTML="Try again!";
+        document.getElementById("message").innerHTML = "Try again!";
     }
 
     localStorage.setItem("balance", balance);
@@ -56,12 +108,18 @@ function spin(){
 }
 
 function randomSymbol(){
-    return symbols[Math.floor(Math.random()*symbols.length)];
+    return symbols[Math.floor(Math.random() * symbols.length)];
 }
 
 function updateUI(){
-    let balance=localStorage.getItem("balance");
-    document.getElementById("balance").innerHTML="Balance: "+balance+" 💰";
-    document.getElementById("jackpot").innerHTML="Jackpot: "+jackpot+" 💎";
+    document.getElementById("balance").innerHTML =
+        "Balance: " + localStorage.getItem("balance") + " 💰";
+
+    document.getElementById("jackpot").innerHTML =
+        "Jackpot: " + localStorage.getItem("jackpot") + " 💎";
 }
+
 </script>
+
+</body>
+</html>
