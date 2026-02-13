@@ -1,1 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Golden Spin Deluxe</title>
+    <style>
+        body {
+            background: #111;
+            color: gold;
+            text-align: center;
+            font-family: Arial;
+        }
 
+        h1 {
+            margin-top: 20px;
+        }
+
+        .slot {
+            font-size: 60px;
+            margin: 20px;
+        }
+
+        button {
+            padding: 15px 40px;
+            font-size: 20px;
+            background: gold;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>🎰 Golden Spin Deluxe 🎰</h1>
+
+<div class="slot" id="slot1">❓</div>
+<div class="slot" id="slot2">❓</div>
+<div class="slot" id="slot3">❓</div>
+
+<button onclick="spin()">SPIN</button>
+
+<div id="result"></div>
+
+<script>
+    const symbols = ["🍒","🍋","🍉","⭐","💎","7️⃣"];
+
+    function spin() {
+        let s1 = symbols[Math.floor(Math.random() * symbols.length)];
+        let s2 = symbols[Math.floor(Math.random() * symbols.length)];
+        let s3 = symbols[Math.floor(Math.random() * symbols.length)];
+
+        document.getElementById("slot1").textContent = s1;
+        document.getElementById("slot2").textContent = s2;
+        document.getElementById("slot3").textContent = s3;
+
+        if (s1 === s2 && s2 === s3) {
+            document.getElementById("result").textContent = "🔥 JACKPOT!!! 🔥";
+        } else {
+            document.getElementById("result").textContent = "Try Again!";
+        }
+    }
+</script>
+
+</body>
+</html>
